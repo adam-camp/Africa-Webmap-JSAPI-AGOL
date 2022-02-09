@@ -1,12 +1,30 @@
-require(["esri/Map", "esri/views/MapView"], function (Map, MapView) {
-        var map = new Map({
-          basemap: "topo-vector"
-        });
+require([
+  "esri/Map", 
+  "esri/views/MapView",  
+  "esri/WebMap",
+   "esri/widgets/Legend"
+], (
+  Map, 
+  MapView, 
+  WebMap, 
+  Legend) => {
+   const webmap = new WebMap({
+     portalItem: {
+       id: "3560de131d1c4e1ea5cee4d42d9287c5"
+     }
+   });
 
-        var view = new MapView({
-          container: "viewDiv",
-          map: map,
-          zoom: 4,
-          center: [15, 65] // longitude, latitude
-        });
+  
+    const view = new MapView({
+        map: webmap, 
+        container: "viewDiv",
+        center: [0, -1],
+        zoom: 3
       });
+        view.ui.add(
+          new Legend({
+            view: view
+          }),
+          "bottom-left"
+        );
+    });
